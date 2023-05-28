@@ -1,0 +1,46 @@
+VirtualSalesForce Page
+
+<apex:page controller="converter">
+    <apex:sectionHeader title="Converter" subtitle="Currency Converter"/>
+    <apex:form >
+        <apex:pageBlock title="Simple Converter">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="USD" action="{!USD}" reRender="res"/>
+                <apex:commandButton value="EURO" action="{!EUR}" reRender="res"/>
+                <apex:commandButton value="Dinar" action="{!Dinar}" reRender="res"/>
+                <apex:commandButton value="YEN" action="{!YEN}" reRender="res"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="converter">
+                <apex:inputText label="Enter Amount in Indian Rupee" html-placeholder="INR Value" value="{!INR}"/>
+                
+                <apex:outputText label="Result" value="{!result}" id="res"></apex:outputText>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+Apex Class
+
+public class converter {
+   public decimal INR{get; set;}
+    
+    public decimal result{get; set;}
+    
+    public void USD()
+    {
+        result = INR * 0.012068;
+    }
+    public void EUR()
+    {
+        result = INR * 0.011;
+    }
+    public void Dinar()
+    {
+        result = INR * 0.046;
+    }
+    public void YEN()
+    {
+        result = INR * 1.67;
+    }
+    
+}

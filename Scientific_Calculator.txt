@@ -1,0 +1,98 @@
+VisualForce Page
+<apex:page controller="ScientificCalculatorController">
+    <apex:form>
+        <apex:pageBlock title="Scientific Calculator">
+            <apex:pageMessages />
+            
+            <apex:pageBlockSection>
+                <apex:outputLabel value="Input: " for="inputValue" />
+                <apex:inputText id="inputValue" value="{!inputNumber}" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection>
+                <apex:outputLabel value="Output: " for="outputValue" />
+                <apex:outputText id="outputValue" value="{!displayValue}" style="font-weight:bold;" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Clear" action="{!clear}" rerender="outputValue,inputValue" />
+            </apex:pageBlockButtons>
+            
+            <apex:outputPanel id="resultPanel">
+                <apex:pageBlockSection>
+                    <apex:commandButton value="Square Root" action="{!calculateSquareRoot}" rerender="outputValue" />
+                    <apex:commandButton value="Square" action="{!calculateSquare}" rerender="outputValue" />
+                    <apex:commandButton value="Inverse" action="{!calculateInverse}" rerender="outputValue" />
+                    <apex:commandButton value="Percentage" action="{!calculatePercentage}" rerender="outputValue" />
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection>
+                    <apex:commandButton value="Sin" action="{!calculateSin}" rerender="outputValue" />
+                    <apex:commandButton value="Cos" action="{!calculateCos}" rerender="outputValue" />
+                    <apex:commandButton value="Tan" action="{!calculateTan}" rerender="outputValue" />
+                    <apex:commandButton value="Log" action="{!calculateLog}" rerender="outputValue" />
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+class
+public class ScientificCalculatorController {
+    public Decimal inputNumber { get; set; }
+    public Decimal displayValue { get; set; }
+    
+    public void clear() {
+        inputNumber = null;
+        displayValue = null;
+    }
+    
+    public void calculateSquareRoot() {
+        if (inputNumber != null) {
+            displayValue = Math.sqrt(inputNumber);
+        }
+    }
+    
+    public void calculateSquare() {
+        if (inputNumber != null) {
+            displayValue = inputNumber * inputNumber;
+        }
+    }
+    
+    public void calculateInverse() {
+        if (inputNumber != null && inputNumber != 0) {
+            displayValue = 1 / inputNumber;
+        }
+    }
+    
+    public void calculatePercentage() {
+        if (inputNumber != null) {
+            displayValue = inputNumber / 100;
+        }
+    }
+    
+    public void calculateSin() {
+        if (inputNumber != null) {
+            displayValue = Math.sin(inputNumber);
+        }
+    }
+    
+    public void calculateCos() {
+        if (inputNumber != null) {
+            displayValue = Math.cos(inputNumber);
+        }
+    }
+    
+    public void calculateTan() {
+        if (inputNumber != null) {
+            displayValue = Math.tan(inputNumber);
+        }
+    }
+    
+    public void calculateLog() {
+        if (inputNumber != null && inputNumber > 0) {
+            displayValue = Math.log10(inputNumber);
+        }
+    }
+}
